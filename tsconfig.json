@@ -7,7 +7,7 @@
     // Environment Settings
     "module": "commonjs",
     "target": "ES6",
-    "types": [],
+    "types": ["jest", "node"],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
