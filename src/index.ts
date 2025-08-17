@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'Hello from Express + TypeScript!' });
+  res.json({ message: 'Hello from Express + TypeScript! This is to test CI/CD' });
 });
 
 app.listen(PORT, () => {
