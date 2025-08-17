@@ -31,7 +31,7 @@ jobs:
       - name: Run tests
         run: npm test
         env:
-          DATABASE_URL: ${{ secrets.SUPABASE_DB_URL }}
+          DATABASE_URL: ${{ secrets.DB_URL }}
 
   build:
     name: Build Application
@@ -86,4 +86,4 @@ jobs:
             --service-id ${{ secrets.RENDER_SERVICE_ID }} \
             --wait
         env:
-          DATABASE_URL: ${{ secrets.SUPABASE_DB_URL}}
+          DATABASE_URL: ${{ secrets.DB_URL}}
