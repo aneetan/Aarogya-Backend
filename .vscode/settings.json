@@ -4,6 +4,7 @@
       "isready",
       "numpages",
       "redcross",
-      "supabase"
+      "supabase",
+      "Vectorizer"
    ]
 }
