@@ -1,0 +1,554 @@
+{
+   "intents": [
+      {
+      "intent_name": "perform_cpr_adult",
+      "user_queries": [
+      "How do I perform CPR on an adult?",
+      "CPR for a grown-up",
+      "An adult collapsed and isn't breathing",
+      "Help, a man is down and not breathing!",
+      "What do I do for cardiac arrest in an adult?",
+      "unresponsive adult not breathing",
+      "heart attack CPR adult",
+      "how to do chest compressions on an adult",
+      "adult CPR steps",
+      "someone passed out and isn't breathing"
+      ],
+      "response": {
+      "immediate_action": "Call 911 or instruct someone else to call. Get an AED if available.",
+      "context": "This is for an unresponsive adult who is not breathing normally. Ensure the environment is safe before approaching.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Place the heel of one hand on the center of the chest, on the breastbone. Place the other hand on top and interlock your fingers."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Position yourself vertically above the chest. With straight arms, push down hard—2 to 2.4 inches (5-6 cm) deep."
+      },
+      {
+      "step_number": 3,
+      "instruction": "Push at a rate of 100 to 120 compressions per minute. Allow the chest to recoil completely after each compression."
+      },
+      {
+      "step_number": 4,
+      "instruction": "Continue cycles of 30 compressions and 2 rescue breaths if you are trained. Otherwise, perform hands-only CPR."
+      }
+      ],
+      "additional_notes": "Continue CPR until help arrives, an AED is ready to use, or the person starts breathing normally. Minimize interruptions in chest compressions."
+      },
+      "metadata": {
+      "warnings": [
+      "Only perform CPR on someone who is unresponsive and not breathing.",
+      "Ensure an ambulance is on the way.",
+      "If you are untrained, provide hands-only CPR (chest compressions only)."
+      ],
+      "source": "American Red Cross, Latest Guidelines",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "perform_cpr_child",
+      "user_queries": [
+      "How do I perform CPR on a child?",
+      "CPR for a kid",
+      "child CPR steps",
+      "my child is not breathing",
+      "baby CPR",
+      "toddler choked and passed out",
+      "unresponsive child"
+      ],
+      "response": {
+      "immediate_action": "If you are alone, perform 2 minutes of CPR first, then call 911. If another person is available, have them call 911 immediately.",
+      "context": "This is for an unresponsive child (from age 1 to puberty) who is not breathing normally.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Place the heel of one or two hands on the center of the chest (depending on the child's size)."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Push down about 2 inches (5 cm) deep at a rate of 100 to 120 compressions per minute."
+      },
+      {
+      "step_number": 3,
+      "instruction": "After 30 compressions, give 2 gentle rescue breaths if trained. Ensure the chest rises with each breath."
+      }
+      ],
+      "additional_notes": "Continue cycles of 30 compressions and 2 breaths until help arrives or the child responds."
+      },
+      "metadata": {
+      "warnings": [
+      "For infants (under 1 year), use infant CPR techniques.",
+      "Be gentler than with an adult but ensure compressions are effective."
+      ],
+      "source": "American Heart Association",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "perform_cpr_infant",
+      "user_queries": [
+      "How do I perform CPR on a baby?",
+      "infant CPR",
+      "newborn not breathing",
+      "baby choked and is unresponsive",
+      "CPR for infants under 1 year"
+      ],
+      "response": {
+      "immediate_action": "If you are alone, perform 2 minutes of CPR first, then call 911. If another person is available, have them call 911 immediately.",
+      "context": "This is for an unresponsive infant (under 1 year old) who is not breathing normally.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Place two fingers on the center of the chest, just below the nipple line."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Push down about 1.5 inches (4 cm) deep at a rate of 100 to 120 compressions per minute."
+      },
+      {
+      "step_number": 3,
+      "instruction": "After 30 compressions, give 2 gentle puffs of air (rescue breaths) if trained. Cover the infant's nose and mouth with your mouth."
+      }
+      ],
+      "additional_notes": "Continue cycles of 30 compressions and 2 breaths until help arrives or the infant responds."
+      },
+      "metadata": {
+      "warnings": [
+      "Do not tilt the infant's head back too far.",
+      "Be extremely gentle with compressions and breaths."
+      ],
+      "source": "American Heart Association",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "choking_adult",
+      "user_queries": [
+      "How do I help a choking adult?",
+      "Heimlich maneuver for adults",
+      "Someone is choking on food",
+      "Help, my friend can't breathe!",
+      "Choking first aid for grown-ups"
+      ],
+      "response": {
+      "immediate_action": "Ask the person: 'Are you choking?' If they cannot speak, cough, or breathe, begin help immediately.",
+      "context": "For a conscious choking adult.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Stand behind the person and wrap your arms around their waist."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Make a fist with one hand. Place the thumb side of your fist against the person's abdomen, just above the navel but below the ribcage."
+      },
+      {
+      "step_number": 3,
+      "instruction": "Grasp your fist with your other hand and perform quick, upward thrusts into the abdomen."
+      },
+      {
+      "step_number": 4,
+      "instruction": "Continue thrusts until the object is dislodged or the person becomes unconscious."
+      }
+      ],
+      "additional_notes": "If the person becomes unconscious, lower them to the ground and begin CPR."
+      },
+      "metadata": {
+      "warnings": [
+      "Do not perform abdominal thrusts on a person who is coughing forcefully or able to speak."
+      ],
+      "source": "American Red Cross",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "choking_child",
+      "user_queries": [
+      "How do I help a choking child?",
+      "Heimlich for a kid",
+      "My child is choking!",
+      "Toddler choking on a toy",
+      "Choking first aid for children"
+      ],
+      "response": {
+      "immediate_action": "If the child is coughing forcefully, encourage them to cough. If they cannot cough, speak, or breathe, begin help.",
+      "context": "For a conscious choking child (over 1 year old).",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Kneel behind the child and wrap your arms around their waist."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Make a fist with one hand. Place the thumb side of your fist against the child's abdomen, just above the navel but below the ribcage."
+      },
+      {
+      "step_number": 3,
+      "instruction": "Grasp your fist with your other hand and perform quick, upward thrusts."
+      }
+      ],
+      "additional_notes": "Continue thrusts until the object is dislodged or the child becomes unconscious."
+      },
+      "metadata": {
+      "warnings": [
+      "Use less force than with an adult."
+      ],
+      "source": "American Red Cross",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "choking_infant",
+      "user_queries": [
+      "How do I help a choking baby?",
+      "Infant choking",
+      "Baby choking on milk",
+      "Newborn choking",
+      "Choking first aid for infants"
+      ],
+      "response": {
+      "immediate_action": "If the infant cannot cough, cry, or breathe, begin help immediately.",
+      "context": "For a conscious choking infant (under 1 year old).",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Sit down and place the infant face down along your forearm, supported by your thigh. Keep the head lower than the chest."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Give up to 5 back blows between the shoulder blades with the heel of your hand."
+      },
+      {
+      "step_number": 3,
+      "instruction": "If the object is not dislodged, turn the infant face up on your thigh, still keeping the head low."
+      },
+      {
+      "step_number": 4,
+      "instruction": "Give up to 5 chest thrusts using two fingers on the center of the chest, just below the nipple line."
+      }
+      ],
+      "additional_notes": "Alternate between 5 back blows and 5 chest thrusts until the object is dislodged or the infant becomes unconscious."
+      },
+      "metadata": {
+      "warnings": [
+      "Never perform abdominal thrusts (Heimlich) on an infant."
+      ],
+      "source": "American Red Cross",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "treat_bleeding",
+      "user_queries": [
+      "How to stop bleeding",
+      "First aid for a cut",
+      "I'm bleeding a lot",
+      "Deep wound what to do",
+      "Help, I got a bad cut!"
+      ],
+      "response": {
+      "immediate_action": "Put on disposable gloves if available to protect yourself from bloodborne pathogens.",
+      "context": "For controlling severe bleeding from a wound.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Have the person lie down and elevate the wounded area above the level of the heart, if possible."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Apply direct pressure to the wound with a sterile gauze pad, clean cloth, or your hand if nothing else is available."
+      },
+      {
+      "step_number": 3,
+      "instruction": "If blood soaks through the cloth, do not remove it. Add more layers on top and continue applying pressure."
+      },
+      {
+      "step_number": 4,
+      "instruction": "If bleeding does not stop with direct pressure, apply pressure to the artery supplying the area (arterial pressure point)."
+      }
+      ],
+      "additional_notes": "Once bleeding is controlled, secure the dressing with a bandage."
+      },
+      "metadata": {
+      "warnings": [
+      "Call 911 if bleeding is severe, spurting, or does not stop with direct pressure.",
+      "Do not apply a tourniquet unless bleeding is life-threatening and cannot be controlled by other means."
+      ],
+      "source": "American Red Cross",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "treat_burn",
+      "user_queries": [
+      "I burned myself",
+      "first aid for a burn",
+      "my child touched the hot pan",
+      "help, steam burn!",
+      "what to do for a burn"
+      ],
+      "response": {
+      "immediate_action": "Assess the burn. If it is severe (large, deep, on face/hands/genitals), call 911 immediately.",
+      "context": "For minor burns only.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Cool the burn immediately. Hold it under cool (not cold) running water for at least 20 minutes."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Remove any jewelry or tight clothing from the burned area, but do not remove anything that is stuck to the skin."
+      },
+      {
+      "step_number": 3,
+      "instruction": "Cover the burn loosely with a sterile, non-stick dressing or cling film."
+      }
+      ],
+      "additional_notes": "Over-the-counter pain relievers can help with pain."
+      },
+      "metadata": {
+      "warnings": [
+      "DO NOT use ice, butter, ointments, or creams on the burn.",
+      "DO NOT break any blisters."
+      ],
+      "source": "NHS UK",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "treat_sprain",
+      "user_queries": [
+      "I sprained my ankle",
+      "first aid for a sprain",
+      "twisted ankle what to do",
+      "how to treat a sprain",
+      "RICE method"
+      ],
+      "response": {
+      "immediate_action": "Stop activity and avoid putting weight on the injured joint.",
+      "context": "Follow the RICE method for the first 48 hours.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Rest: Avoid using the injured area."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Ice: Apply an ice pack wrapped in a cloth for 20 minutes every 2-3 hours."
+      },
+      {
+      "step_number": 3,
+      "instruction": "Compression: Wrap the area with an elastic bandage to reduce swelling. Do not wrap too tightly."
+      },
+      {
+      "step_number": 4,
+      "instruction": "Elevation: Raise the injured area above the level of the heart as much as possible."
+      }
+      ],
+      "additional_notes": "See a doctor if you hear a popping sound, cannot bear weight, or have severe pain."
+      },
+      "metadata": {
+      "warnings": [
+      "Do not apply heat in the first 48 hours as it can increase swelling."
+      ],
+      "source": "Mayo Clinic",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "treat_fracture",
+      "user_queries": [
+      "I think I broke my bone",
+      "first aid for a fracture",
+      "possible broken arm",
+      "what to do for a broken bone"
+      ],
+      "response": {
+      "immediate_action": "Call 911 if the injury is to the head, neck, back, hip, or thigh; if the bone has broken through the skin; or if the person is unresponsive.",
+      "context": "The goal is to immobilize the area and prevent further injury until help arrives.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Tell the person not to move the injured area."
+      },
+      {
+      "step_number": 2,
+      "instruction": "If you must splint the injury, do so without trying to realign the bone. Splint it in the position you found it."
+      },
+      {
+      "step_number": 3,
+      "instruction": "Apply a cold pack wrapped in a cloth to the area to reduce swelling and pain."
+      }
+      ],
+      "additional_notes": "Keep the person warm and calm while waiting for emergency services."
+      },
+      "metadata": {
+      "warnings": [
+      "DO NOT try to push a protruding bone back into the body.",
+      "DO NOT allow the person to eat or drink in case surgery is needed."
+      ],
+      "source": "American Red Cross",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "use_epipen",
+      "user_queries": [
+      "How to use an EpiPen",
+      "severe allergic reaction what to do",
+      "anaphylaxis first aid",
+      "my friend is having an allergic reaction",
+      "EpiPen instructions"
+      ],
+      "response": {
+      "immediate_action": "This is a life-threatening emergency. Call 911 NOW. Use the EpiPen immediately while waiting for help.",
+      "context": "For a severe allergic reaction (anaphylaxis) where the person has been prescribed an EpiPen.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Grip the EpiPen in your fist with the orange tip (needle end) pointing downward."
+      },
+      {
+      "step_number": 2,
+      "instruction": "With your other hand, pull off the blue safety release."
+      },
+      {
+      "step_number": 3,
+      "instruction": "Swing and firmly push the orange tip against the outer mid-thigh until you hear a loud 'click'. Hold in place for 3 seconds."
+      },
+      {
+      "step_number": 4,
+      "instruction": "Remove the EpiPen and massage the injection area for 10 seconds."
+      }
+      ],
+      "additional_notes": "The person must still go to the hospital even if they feel better, as a second reaction can occur."
+      },
+      "metadata": {
+      "warnings": [
+      "Do not put your thumb, fingers, or hand over the orange tip.",
+      "Inject only into the thigh."
+      ],
+      "source": "EpiPen Official Website",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "treat_nosebleed",
+      "user_queries": [
+      "I have a nosebleed",
+      "How to stop a nosebleed",
+      "My nose is bleeding",
+      "First aid for nosebleed",
+      "Blood from nose what to do"
+      ],
+      "response": {
+      "immediate_action": "Stay calm and sit down.",
+      "context": "Most nosebleeds look worse than they are and can be stopped easily.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Sit up straight and lean forward slightly. Do not lie down or tilt your head back."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Pinch the soft part of your nose (just below the bony bridge) firmly between your thumb and finger."
+      },
+      {
+      "step_number": 3,
+      "instruction": "Breathe through your mouth and hold this pressure for 10-15 minutes without releasing."
+      }
+      ],
+      "additional_notes": "You can apply a cold compress to the bridge of the nose to help constrict blood vessels."
+      },
+      "metadata": {
+      "warnings": [
+      "Leaning forward prevents blood from flowing down the throat, which can cause nausea or choking.",
+      "See a doctor if the nosebleed lasts longer than 20 minutes, results from a serious injury, or occurs frequently."
+      ],
+      "source": "NHS UK",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "treat_heatstroke",
+      "user_queries": [
+      "symptoms of heatstroke",
+      "first aid for heat stroke",
+      "someone overheated and collapsed",
+      "heat exhaustion what to do"
+      ],
+      "response": {
+      "immediate_action": "This is a medical emergency. Call 911 immediately.",
+      "context": "Heatstroke is a life-threatening condition where the body's temperature regulation fails.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Move the person to a cool, shaded area or an air-conditioned room."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Remove unnecessary clothing."
+      },
+      {
+      "step_number": 3,
+      "instruction": "Cool the person rapidly by whatever means available: immerse in cool water, spray with a hose, sponge with cool water, or place cold, wet cloths on their head, neck, armpits, and groin."
+      },
+      {
+      "step_number": 4,
+      "instruction": "Fan air over the person while they are wet to speed cooling."
+      }
+      ],
+      "additional_notes": "Do not give the person anything to drink if they are confused or unconscious."
+      },
+      "metadata": {
+      "warnings": [
+      "Do not give the person aspirin or acetaminophen to reduce fever."
+      ],
+      "source": "CDC (Centers for Disease Control and Prevention)",
+      "last_updated": "2023-10-27"
+      }
+      },
+      {
+      "intent_name": "treat_hypothermia",
+      "user_queries": [
+      "symptoms of hypothermia",
+      "first aid for hypothermia",
+      "someone is very cold and confused",
+      "what to do for extreme cold exposure"
+      ],
+      "response": {
+      "immediate_action": "This is a medical emergency. Call 911 immediately.",
+      "context": "Hypothermia occurs when the body loses heat faster than it can produce it, causing a dangerously low body temperature.",
+      "steps": [
+      {
+      "step_number": 1,
+      "instruction": "Move the person to a warm room or shelter."
+      },
+      {
+      "step_number": 2,
+      "instruction": "Remove any wet clothing gently."
+      },
+      {
+      "step_number": 3,
+      "instruction": "Warm the center of the body first (chest, neck, head, groin) using an electric blanket or skin-to-skin contact under loose, dry layers of blankets and clothing."
+      },
+      {
+      "step_number": 4,
+      "instruction": "If the person is alert and can swallow, offer warm, sweet non-alcoholic drinks."
+      }
+      ],
+      "additional_notes": "Handle the person gently, as rough movement can trigger dangerous heart rhythms."
+      },
+      "metadata": {
+      "warnings": [
+      "Do not apply direct heat (hot water, heating pad, heat lamp). Warm the person slowly.",
+      "Do not give the person alcohol."
+      ],
+      "source": "American Red Cross",
+      "last_updated": "2023-10-27"
+      }
+      }
+      ]
+}
