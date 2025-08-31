@@ -25,7 +25,6 @@ class ChatService {
       await this.vectorStore.addVectors(embeddedIntents);
 
       this.initialized = true;
-      console.log('Chat service initialized with', embeddedIntents.length, 'intents');
    }
 
     // Process a user message and generate a response

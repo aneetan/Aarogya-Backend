@@ -27,7 +27,6 @@ class PineconeConfig {
          // Verify connection by listing indexes
          await this.pinecone.listIndexes();
          this.isInitialized = true;
-         console.log('Pinecone client initialized successfully');
       } catch (error) {
          console.error('Failed to initialize Pinecone client:', error);
          throw error;

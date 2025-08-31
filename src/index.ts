@@ -5,6 +5,7 @@ import { createChatService } from './services/chat.service';
 import { DatasetProps } from './types/embedding.types';
 import firstAidDataset from '../data/datasets.json';
 import { loadDataset, validateDataset } from './helpers/dataset.helper';
+import chatRouter from './routes/chat.route';
 
 dotenv.config();
 
@@ -14,16 +15,9 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 
+app.use('/chat', chatRouter);
+
 app.get('/', async(req: Request, res: Response) => {
-   const dataset = loadDataset();
-    validateDataset(dataset);
-
-  const chatService = createChatService(dataset);
-   await chatService.initialize();
-
-  const response = await chatService.processMessage("How do perform cpr?");
-  console.log("Bot response:", response.response);
-
   res.json({ message: 'Hello from Express + TypeScript! This is to test CI/CD' });
 
 });

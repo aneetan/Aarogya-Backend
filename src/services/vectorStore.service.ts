@@ -18,7 +18,6 @@ class VectorStoreService {
    async initialize(): Promise<void> {
       try {
          await this.pineconeConfig.initialize();
-         console.log('VectorStoreService initialized successfully');
       } catch (error) {
          console.error('Failed to initialize VectorStoreService:', error);
          throw error;
@@ -34,6 +33,12 @@ class VectorStoreService {
    // Add embedded intents to vector store
    async addVectors (embeddedIntents: IntentProps[]): Promise<void> {
       try {
+         const index = this.getIndex();
+         const stats = await index.describeIndexStats();
+         if (stats.totalRecordCount && stats.totalRecordCount > 0) {
+            console.log('Vectors already exist in Pinecone. Skipping addition.');
+            return;
+         }
 
           const validIntents = embeddedIntents.filter(intent => {
             const isValid = intent.embeddings && intent.embeddings.length === this.vectorDimensions;
@@ -46,8 +51,6 @@ class VectorStoreService {
          if (validIntents.length === 0) {
             throw new Error('No valid embeddings found. All embeddings have dimension 0.');
          }
-
-         console.log(`Processing ${validIntents.length} valid intents out of ${embeddedIntents.length} total`);
 
          const vectors: VectorProps[] = embeddedIntents.map((intent, idx) => ({
             id: `intent-${idx}-${intent.intent_name.replace(/\s+/g, '-').toLowerCase()}`,
@@ -67,14 +70,12 @@ class VectorStoreService {
 
          // Upsert vectors in batches (Pinecone recommends batches of 100)
          const batchSize = 100;
-         const index = this.getIndex();
 
          for (let i = 0; i < vectors.length; i += batchSize) {
             const batch = vectors.slice(i, i + batchSize);
             await index.upsert(batch);
          }
 
-         console.log(`Successfully added ${vectors.length} vectors to Pinecone`);
       } catch (e) {
          console.error('Error adding vectors to Pinecone:', e);
          throw e;
