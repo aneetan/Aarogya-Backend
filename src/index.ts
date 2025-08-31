@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { createChatService } from './services/chat.service';
 import { DatasetProps } from './types/embedding.types';
 import firstAidDataset from '../data/datasets.json';
+import { loadDataset, validateDataset } from './helpers/dataset.helper';
 
 dotenv.config();
 
@@ -14,11 +15,14 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', async(req: Request, res: Response) => {
-  const dataset: DatasetProps = firstAidDataset as DatasetProps;
+   const dataset = loadDataset();
+    validateDataset(dataset);
+
   const chatService = createChatService(dataset);
-  const response = await chatService.processMessage("How do I perform CPR?");
+   await chatService.initialize();
+
+  const response = await chatService.processMessage("How do perform cpr?");
   console.log("Bot response:", response.response);
-  console.log("Sources:", response.sources);
 
   res.json({ message: 'Hello from Express + TypeScript! This is to test CI/CD' });
 

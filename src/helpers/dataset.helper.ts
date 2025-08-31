@@ -3,8 +3,8 @@ import { DatasetProps } from "../types/embedding.types";
 // Load the dataset from JSON file
 export function loadDataset() {
   try {
-    const dataset = require('../../data/first_aid_dataset.json');
-    return dataset;
+    const dataset = require("../../data/datasets.json");
+    return dataset as DatasetProps;
   } catch (error) {
     console.error('Error loading dataset:', error);
     throw new Error('Could not load the first aid dataset');

@@ -21,6 +21,7 @@ class ChatService {
       if (this.initialized) return;
 
       const embeddedIntents = await this.embeddingService.generateAllEmbeddings(this.dataset);
+      await vectorStoreService.initialize();
       await this.vectorStore.addVectors(embeddedIntents);
 
       this.initialized = true;

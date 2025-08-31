@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 //Initialize embedding models
 export const getEmbeddingModel = () => {
-   return genAI.getGenerativeModel({
+   return genAI.getGenerativeModel({ 
       model: "models/embedding-001"
    });
 };

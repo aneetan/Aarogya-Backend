@@ -1,3 +1,5 @@
+import { PineconeRecord, RecordMetadata } from "@pinecone-database/pinecone";
+
 export interface DatasetProps {
    intents: IntentProps[];
 }
@@ -28,7 +30,7 @@ export interface MetadataProps {
    last_updated: string;
 }
 
-export interface VectorMetadata {
+export interface VectorMetadata extends RecordMetadata {
    intent_name: string;
    immediate_action: string;
    context: string;
@@ -40,7 +42,7 @@ export interface VectorMetadata {
    user_queries: string;
 }
 
-export interface VectorProps {
+export interface VectorProps extends PineconeRecord {
    id: string;
    values: number[];
    metadata: VectorMetadata;
@@ -48,27 +50,24 @@ export interface VectorProps {
 
 export interface FindSimilarVectorsResult {
    similarity: number;
-   intent: IntentProps;
+    intent: {
+    intent_name: string;
+    response: ResponseProps;
+    metadata: MetadataProps;
+    user_queries: string[];
+  };
 }
 
 export interface PineconeMatch {
+   id: string;
    score: number;
-   metadata: {
-      intent_name: string;
-      immediate_action: string;
-      context: string;
-      steps: string;
-      additional_notes: string;
-      warnings: string;
-      source: string;
-      last_updated: string;
-      user_queries: string;
-   };
+   metadata?: Record<string, any>;
    values?: number[];
 }
 
 export interface PineconeQueryResponse {
    matches: PineconeMatch[];
+   namespace: string;
 }
 
 export interface ChatResponse {
