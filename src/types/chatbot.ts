@@ -1,3 +1,5 @@
+import { StepProps } from "./embedding.types";
+
 export interface Chunk {
   text: string;
   metadata: {
@@ -5,4 +7,13 @@ export interface Chunk {
     chunkIndex: number;
     source: string;
   };
+}
+
+export interface MedicalResponse {
+  title: string;
+  overview?: string;
+  warnings: string[];
+  steps: StepProps[];
+  additionalNotes?: string[];
+  emergencyAction?: string;
 }
