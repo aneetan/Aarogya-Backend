@@ -1,4 +1,5 @@
 import { PineconeRecord, RecordMetadata } from "@pinecone-database/pinecone";
+import { MedicalResponse } from "./chatbot";
 
 export interface DatasetProps {
    intents: IntentProps[];
@@ -22,6 +23,7 @@ export interface ResponseProps {
 export interface StepProps{
    step_number: number;
    instruction: string;
+   details: string;
 }
 
 export interface MetadataProps {
@@ -71,7 +73,7 @@ export interface PineconeQueryResponse {
 }
 
 export interface ChatResponse {
-   response: string;
+   response: MedicalResponse | string;
    sources : {
       intent: string;
       similarity: number;

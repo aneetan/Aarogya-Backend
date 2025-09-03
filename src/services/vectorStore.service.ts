@@ -1,5 +1,4 @@
-import { Pinecone } from "@pinecone-database/pinecone";
-import { DatasetProps, FindSimilarVectorsResult, IntentProps, PineconeMatch, PineconeQueryResponse, VectorMetadata, VectorProps } from "../types/embedding.types";
+import { FindSimilarVectorsResult, IntentProps, PineconeMatch, VectorMetadata, VectorProps } from "../types/embedding.types";
 import PineconeConfig from "../config/pinecone.config";
 require('dotenv').config();
 

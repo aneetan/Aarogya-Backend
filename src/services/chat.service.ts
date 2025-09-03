@@ -2,6 +2,7 @@ import embeddingService from "./embedding.service";
 import vectorStoreService from "./vectorStore.service";
 import { ChatResponse, DatasetProps } from "../types/embedding.types";
 import { getGenerativeModel } from "../config/gemini";
+import { MedicalResponse } from "../types/chatbot";
 
 class ChatService {
    private embeddingService:  typeof embeddingService;
@@ -27,6 +28,24 @@ class ChatService {
       this.initialized = true;
    }
 
+    private extractJsonResponse(text: string): MedicalResponse | string {
+    try {
+      // Try to find JSON in the response
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        return JSON.parse(jsonMatch[0]);
+      }
+      
+      // If no JSON found, return fallback
+      return "I'm not sure how to help with that specific concern. If this is a medical emergency, please call emergency services immediately. Always consult with a healthcare professional for medical advice"
+      
+    } catch (error) {
+      console.error('Error parsing JSON response:', error);
+      return "I'm not sure how to help with that specific concern. If this is a medical emergency, please call emergency services immediately. Always consult with a healthcare professional for medical advice"
+
+    }
+   }
+
     // Process a user message and generate a response
     async processMessage(userMessage: string):  Promise<ChatResponse> {
       if (!this.initialized) await this.initialize();
@@ -39,7 +58,7 @@ class ChatService {
 
       if (similarIntents.length === 0) {
          return {
-         response: "I'm not sure how to help with that. Please try to describe your first aid concern more specifically, or call emergency services if this is an urgent medical situation.",
+         response: "I'm not sure how to help with that specific concern. If this is a medical emergency, please call emergency services immediately. Always consult with a healthcare professional for medical advice",
          sources: []
          };
       }
@@ -74,18 +93,58 @@ class ChatService {
          User question: "${userMessage}"
 
          Please provide a helpful, accurate response based on the context above. 
-         If the context doesn't contain relevant information, acknowledge this and suggest contacting medical professionals.
-         Always include any relevant warnings from the context.
-         Format your response in a clear, easy-to-follow manner.
+         Format your response clearly with the following structure:
+         IMPORTANT: You MUST respond with ONLY valid JSON in the following format:
+         {
+         "title": "Brief, clear title (e.g., 'CPR for Adults')",
+         "overview": "Short 1-2 sentence overview",
+         "warnings": [
+            "Warning 1",
+            "Warning 2",
+            "Warning 3"
+         ],
+         "steps": [
+            {
+               "step_number": 1,
+               "instruction": "Clear, concise instruction",
+               "details": "Additional details if needed"
+            }
+         ],
+         "additionalNotes": [
+            "Note 1",
+            "Note 2"
+         ],
+         "emergencyAction": "When to seek emergency medical help"
+         }
+
+         Rules:
+         - Be concise but thorough
+         - Include all relevant warnings from the context
+         - Number steps sequentially starting from 1
+         - Use simple, clear language understandable by non-medical professionals
+         - Always include emergency action guidance
+         - If context doesn't contain relevant information, use general first aid principles
+         - DO NOT include any text outside the JSON structure
+         - Start with a brief introduction if needed
+         - End with a recommendation to seek professional medical help
+
+         Important formatting rules:
+         - Do NOT use markdown formatting (no **, *, etc.)
+         - Use clear line breaks between sections
+         - Number steps clearly (1., 2., 3., etc.)
+         - Keep the language simple and easy to understand
+         - If the context doesn't contain relevant information, acknowledge this and suggest contacting medical professionals.
       `;
 
        try {
          const result = await model.generateContent(prompt);
          const response = await result.response;
          const text = response.text();
+
+         const formattedResponse = this.extractJsonResponse(text);
          
          return {
-         response: text,
+         response: formattedResponse,
          sources: similarIntents.map(item => ({
             intent: item.intent.intent_name,
             similarity: item.similarity,
@@ -95,7 +154,7 @@ class ChatService {
       } catch (error) {
          console.error('Error generating response:', error);
          return {
-         response: "I'm experiencing technical difficulties. Please try again later or seek help from a medical professional if this is urgent.",
+         response: "I'm not sure how to help with that specific concern. If this is a medical emergency, please call emergency services immediately. Always consult with a healthcare professional for medical advice",
          sources: []
       };
    }
