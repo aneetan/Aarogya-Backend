@@ -2,6 +2,7 @@ import embeddingService from "./embedding.service";
 import vectorStoreService from "./vectorStore.service";
 import { ChatResponse, DatasetProps } from "../types/embedding.types";
 import { getGenerativeModel } from "../config/gemini";
+import formatResponse from "../helpers/formatResponse.helper";
 
 class ChatService {
    private embeddingService:  typeof embeddingService;
@@ -74,18 +75,31 @@ class ChatService {
          User question: "${userMessage}"
 
          Please provide a helpful, accurate response based on the context above. 
-         If the context doesn't contain relevant information, acknowledge this and suggest contacting medical professionals.
-         Always include any relevant warnings from the context.
-         Format your response in a clear, easy-to-follow manner.
+         Format your response clearly with the following structure:
+
+         1. Start with a brief introduction if needed
+         2. List any important WARNINGS first (safety precautions)
+         3. Provide step-by-step instructions in numbered format
+         4. Include any additional notes or important information
+         5. End with a recommendation to seek professional medical help
+
+         Important formatting rules:
+         - Do NOT use markdown formatting (no **, *, etc.)
+         - Use clear line breaks between sections
+         - Number steps clearly (1., 2., 3., etc.)
+         - Keep the language simple and easy to understand
+         - If the context doesn't contain relevant information, acknowledge this and suggest contacting medical professionals.
       `;
 
        try {
          const result = await model.generateContent(prompt);
          const response = await result.response;
          const text = response.text();
+
+         const formattedResponse = formatResponse(text);
          
          return {
-         response: text,
+         response: formattedResponse,
          sources: similarIntents.map(item => ({
             intent: item.intent.intent_name,
             similarity: item.similarity,
