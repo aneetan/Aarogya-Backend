@@ -1,11 +1,8 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from "dotenv";
-import { createChatService } from './services/chat.service';
-import { DatasetProps } from './types/embedding.types';
-import firstAidDataset from '../data/datasets.json';
-import { loadDataset, validateDataset } from './helpers/dataset.helper';
 import chatRouter from './routes/chat.route';
+import campRouter from './routes/camp.route';
 
 dotenv.config();
 
@@ -16,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/chat', chatRouter);
+app.use('/camp', campRouter);
 
 app.get('/', async(req: Request, res: Response) => {
   res.json({ message: 'Hello from Express + TypeScript! This is to test CI/CD' });
