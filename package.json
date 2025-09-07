@@ -37,7 +37,8 @@
     "pg": "^8.16.3",
     "pg-hstore": "^2.3.4",
     "pinecone-client": "^2.0.0",
-    "sequelize": "^6.37.7"
+    "sequelize": "^6.37.7",
+    "zod": "^4.1.5"
   },
   "devDependencies": {
     "@supabase/supabase-js": "^2.55.0",

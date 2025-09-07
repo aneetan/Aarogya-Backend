@@ -1,5 +1,6 @@
 import {Sequelize} from "sequelize"
 import dotenv from "dotenv"
+import { initializeModels } from "../models/init";
 
 dotenv.config();
 
@@ -18,11 +19,14 @@ const sequelize = new Sequelize(process.env.DB_URL!, {
 export const connectToDB = async(): Promise<void> => {
    try {
       await sequelize.authenticate();
-      await sequelize.sync({ alter: true });
+      initializeModels(sequelize);
+      await sequelize.sync({ force: false, alter: true });
       console.log("Connected to database in 5432");
 
    } catch (e){
       console.log("Failed to connect db: ", e);
    }
 }
+
+export {sequelize}
 
