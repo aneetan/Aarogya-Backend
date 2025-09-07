@@ -20,11 +20,13 @@ export const connectToDB = async(): Promise<void> => {
    try {
       await sequelize.authenticate();
       initializeModels(sequelize);
-      await sequelize.sync({ alter: false });
+      await sequelize.sync({ force: false, alter: true });
       console.log("Connected to database in 5432");
 
    } catch (e){
       console.log("Failed to connect db: ", e);
    }
 }
+
+export {sequelize}
 

@@ -10,12 +10,12 @@ export function  initializeModels(sequelize: Sequelize): Models {
       Camp: Camp.initialize(sequelize)
    }
 
-   //set up associations
-   Object.values(models).forEach(model => {
-      if(model.associate){
-         model.associate(models);
-      }
-   })
+   // //set up associations
+   // Object.values(models).forEach(model => {
+   //    if(model.associate){
+   //       model.associate(models);
+   //    }
+   // })
 
    return models;
 }

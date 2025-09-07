@@ -5,5 +5,6 @@ const campRouter = Router();
 
 campRouter.post('/add', campController.addCamp);
 campRouter.get('/', campController.getCamps);
+ 
 
 export default campRouter;

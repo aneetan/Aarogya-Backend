@@ -1,4 +1,4 @@
-import { DataTypes, InitOptions, Model, ModelAttributes } from "sequelize";
+import { DataTypes, InitOptions, Model, ModelAttributes, Sequelize } from "sequelize";
 import { CampAttributes } from "../types/camp.types";
 
 class Camp extends Model<CampAttributes, Omit<CampAttributes, 'id'>> implements CampAttributes {
@@ -16,7 +16,7 @@ class Camp extends Model<CampAttributes, Omit<CampAttributes, 'id'>> implements 
    public lng!: number;
    public status!: "upcoming" | "active" | "expired";
 
-   static initialize(sequelize: any) : typeof Camp {
+   static initialize(sequelize: Sequelize) : typeof Camp {
       const attributes: ModelAttributes<Camp, CampAttributes> = {
          id:{
             type: DataTypes.INTEGER,
@@ -65,35 +65,28 @@ class Camp extends Model<CampAttributes, Omit<CampAttributes, 'id'>> implements 
             allowNull: false,
             validate: {
                isDate: true,
-               isAfter: new Date().toISOString().split('T')[0] // Ensures date is not in the past
+               isAfter: new Date().toISOString().split('T')[0] 
             }
          },
          days: {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
-               min: 1,
-               max: 365,
-               isInt: true
+               min: 1
             }
          },
          starting_time: {
-            type: DataTypes.TIME,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                is: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/ 
             }
          },
          ending_time: {
-            type: DataTypes.TIME,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                is: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
-               isAfterStartTime(value: string) {
-                  if (this.starting_time && value <= this.starting_time) {
-                     throw new Error('Ending time must be after starting time');
-                  }
-               }
             }
          },
          lat: {
@@ -133,6 +126,10 @@ class Camp extends Model<CampAttributes, Omit<CampAttributes, 'id'>> implements 
       }
 
       return Camp.init(attributes, options) as typeof Camp;
+   }
+
+   static associate(models: any): void {
+      // Add associations here if needed
    }
 }
 
