@@ -7,7 +7,20 @@ class CampRepository {
    }
 
     async getCamps(): Promise<Camp[]> {
-      return await Camp.findAll();
+      return await Camp.findAll({
+         order: [
+            ['date', 'ASC'] 
+         ]
+      });
+   }
+
+   async getRecentCamps(): Promise<Camp[]> {
+      return await Camp.findAll({
+         order: [
+            ['date', 'ASC'] 
+         ],
+         limit: 6 
+      });
    }
 }
 

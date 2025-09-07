@@ -4,7 +4,6 @@ import campRepository from "../repositories/camp.repository";
 import { errorResponse } from "../helpers/errorMsg.helper";
 import { validateSchema } from "../middleware/validateSchema";
 import { addCampSchema, CampFormUserInput } from "../schemas/camp.schema";
-import Camp from "../models/camp.model";
 
 class CampController {
    addCamp = [
@@ -41,13 +40,24 @@ class CampController {
          }
       }
    ]
-
-
    getCamps= [
       // verifyAccessToken,
       async (req: Request, res: Response, next: NextFunction) => {
          try{
             const notes: CampAttributes[] = await campRepository.getCamps();
+            res.status(200).json(notes);
+         } catch (e) {
+            errorResponse(e, res, "Error while retrieving notes"); 
+            next(e);
+         }
+      }
+   ]
+
+   getRecentCamps= [
+      // verifyAccessToken,
+      async (req: Request, res: Response, next: NextFunction) => {
+         try{
+            const notes: CampAttributes[] = await campRepository.getRecentCamps();
             res.status(200).json(notes);
          } catch (e) {
             errorResponse(e, res, "Error while retrieving notes"); 
