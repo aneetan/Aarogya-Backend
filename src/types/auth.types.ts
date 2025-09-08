@@ -4,6 +4,7 @@ export interface UserAttributes {
     email: string;
     role: 'user' | 'local_body';
     password: string;
+    emailVerified?: boolean;
 }
 
 export interface UserAttributesDto {

@@ -34,14 +34,12 @@ class UserRepository {
       return user;
    }
 
-   async updatePassword(id: number, hashedPassword: string): Promise<User> {
+   async updateVerificationStatus(id: number): Promise<User> {
       const user = await User.findByPk(id);
 
       if (!user) throw new Error('User not found');
 
-      if(hashedPassword) {
-         await user.update({ password: hashedPassword });
-      }
+      await user.update({ emailVerified: true });
       return user;
    }
 }

@@ -13,7 +13,6 @@ const sequelize = new Sequelize(process.env.DB_URL!, {
          rejectUnauthorized: false
       },
    },
-   logging: false,
 });
 
 export const connectToDB = async(): Promise<void> => {

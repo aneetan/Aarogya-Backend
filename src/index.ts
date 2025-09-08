@@ -18,7 +18,7 @@ connectToDB()
     .then(() => {
         app.use('/chat', chatRouter);
         app.use('/camp', campRouter);
-        app.use('/', authRouter);
+        app.use('/auth', authRouter);
 
         app.get('/', async(req: Request, res: Response) => {
           res.json({ message: 'Hello from AidLink' });

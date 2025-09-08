@@ -8,6 +8,7 @@ class User extends Model<UserAttributes , Omit<UserAttributes, 'id'>> implements
    public email!: string;
    public role!: "user" | "local_body";
    public password!: string;
+   public emailVerified?: boolean | undefined;
 
    static initialize(sequelize : any): typeof User {
       const attributes: ModelAttributes<User, UserAttributes> = {
@@ -34,7 +35,6 @@ class User extends Model<UserAttributes , Omit<UserAttributes, 'id'>> implements
          role: {
             type: DataTypes.ENUM('user', 'local_body'),
             allowNull: false,
-            defaultValue: 'upcoming',
             validate: {
                isIn: [['user', 'local_body']]
             }
@@ -46,6 +46,9 @@ class User extends Model<UserAttributes , Omit<UserAttributes, 'id'>> implements
                const hashed = bcrypt.hashSync(value, 10);
                this.setDataValue('password', hashed);
             }
+         },
+         emailVerified:{
+            type: DataTypes.BOOLEAN
          }
       };
 
@@ -60,9 +63,6 @@ class User extends Model<UserAttributes , Omit<UserAttributes, 'id'>> implements
    }
 
    public static associate(models: any){
-      User.hasMany(models.Notes, {
-         foreignKey: 'userId',
-      });
    }
 }
 
