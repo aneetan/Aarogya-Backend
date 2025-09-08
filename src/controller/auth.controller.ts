@@ -8,7 +8,12 @@ import { redis } from "../config/redis.config";
 import { verifyAccessToken } from "../middleware/verifyAccessToken";
 import { JwtPayload } from "jsonwebtoken";
 import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
 import emailService from "../services/email.service";
+import { OTPService } from "../services/otp.service";
+import { VerifyOTPInput, verifyOTPSchema } from "../schemas/otp.schema";
+
+dotenv.config();
 
 
 class AuthController {
@@ -36,32 +41,26 @@ class AuthController {
             };
 
             const newUser = await userRepository.createUser(userData);
+            const email = newUser.email;
 
-              // Generate email verification token
-            const verificationToken = generateJwtToken(
-               { userId: newUser.id, email: newUser.email },
-               '24h'
-            );
+            const otp = OTPService.generateOTP();
 
-            // Store verification token in Redis with expiration
-            await redis.set(
-               `verification:${newUser.id}`, 
-               verificationToken, 
-               "EX", 
-               24 * 60 * 60 
-            );
+            OTPService.storeOTP(email, otp);
 
-            // Send verification email
-            await emailService.sendVerificationEmail(
-               newUser.email,
-               verificationToken,
-               newUser.fullName
-            );
+            const otpToken = OTPService.generateOTPToken({
+               email,
+               otp,
+               purpose: 'password_reset'
+            })
 
-            const plainUser = newUser.get({ plain: true });
-            const { password, ...userWithoutPassword } = plainUser;
+            await emailService.sendOTPEmail(email, otp, newUser.fullName);
 
-            res.status(201).json(userWithoutPassword);
+            res.status(200).json({
+               message: 'OTP sent to email',
+               token: otpToken,
+               email: email
+            });
+
          } catch (e) {
             errorResponse(e, res, "Error while registering user");
             next(e);
@@ -102,42 +101,37 @@ class AuthController {
         }
     ];
 
-   verifyEmail = [
-   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-      try {
-         const { token } = req.query;
+   verifyOTP =[
+      validateSchema(verifyOTPSchema),
+      async (req: Request<{}, {}, VerifyOTPInput['body']>, res: Response, next: NextFunction) => {
+         try{
+            const {email, otp, token} = req.body;
 
-         if (!token || typeof token !== 'string') {
-         throw new Error("Verification token is required");
+            let isValid= false;
+            if(token) {
+               try{
+                  const payload = OTPService.verifyOTPToken(token);
+                  isValid = payload.otp === otp && payload.email === email;
+               } catch {
+                  isValid = false;
+               }
+            }
+            if (!isValid) {
+               throw new Error('Invalid or expired OTP');
+            }
+
+            await userRepository.updateVerificationStatus(email);
+
+
+            res.status(200).json({
+               message: 'OTP verified successfully',
+            });
+            
+         } catch (e) {
+            errorResponse(e, res, "Invalid or expired OTP");
+            next(e);
          }
-
-         // Verify the token
-         const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
-         
-         if (!decoded.userId) {
-         throw new Error("Invalid verification token");
-         }
-
-         // Check if token exists in Redis
-         const storedToken = await redis.get(`verification:${decoded.userId}`);
-         if (!storedToken || storedToken !== token) {
-         throw new Error("Invalid or expired verification token");
-         }
-
-         // Update user's email verification status
-         await userRepository.updateVerificationStatus(decoded.userId);
-
-         // Remove the verification token from Redis
-         await redis.del(`verification:${decoded.userId}`);
-
-         res.status(200).json({ 
-         message: "Email verified successfully" 
-         });
-      } catch (e) {
-         errorResponse(e, res, "Email verification failed");
-         next(e);
       }
-   }
    ];
 
     logout = [

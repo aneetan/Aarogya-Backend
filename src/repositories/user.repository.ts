@@ -34,8 +34,8 @@ class UserRepository {
       return user;
    }
 
-   async updateVerificationStatus(id: number): Promise<User> {
-      const user = await User.findByPk(id);
+   async updateVerificationStatus(email: string): Promise<User> {
+      const user = await User.findOne({where:{email}});
 
       if (!user) throw new Error('User not found');
 

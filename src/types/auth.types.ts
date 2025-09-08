@@ -19,3 +19,9 @@ export interface UserLoginDto {
     email: string;
     password: string;
 }
+
+export interface OTPVerifyData{
+    token: string;
+    email: string;
+    otp: string;
+}
