@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import chatRouter from './routes/chat.route';
 import campRouter from './routes/camp.route';
 import { connectToDB } from './config/dbconfig';
+import authRouter from './routes/auth.route';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ connectToDB()
     .then(() => {
         app.use('/chat', chatRouter);
         app.use('/camp', campRouter);
+        app.use('/', authRouter);
 
         app.get('/', async(req: Request, res: Response) => {
           res.json({ message: 'Hello from AidLink' });
