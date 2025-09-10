@@ -4,10 +4,14 @@ import campRepository from "../repositories/camp.repository";
 import { errorResponse } from "../helpers/errorMsg.helper";
 import { validateSchema } from "../middleware/validateSchema";
 import { addCampSchema, CampFormUserInput } from "../schemas/camp.schema";
+import { verifyAccessToken } from "../middleware/verifyAccessToken";
+import { requireLocalBody } from "../middleware/validateRole";
 
 class CampController {
    addCamp = [
       validateSchema(addCampSchema),
+      verifyAccessToken,
+      requireLocalBody,
       async (req: Request, res: Response, next: NextFunction) => {
          try {
             const campDto = req.body as Omit<CampAttributes, 'id'> ;
@@ -41,7 +45,7 @@ class CampController {
       }
    ]
    getCamps= [
-      // verifyAccessToken,
+      verifyAccessToken,
       async (req: Request, res: Response, next: NextFunction) => {
          try{
             const notes: CampAttributes[] = await campRepository.getCamps();

@@ -15,7 +15,6 @@ import { VerifyOTPInput, verifyOTPSchema } from "../schemas/otp.schema";
 
 dotenv.config();
 
-
 class AuthController {
    register = [
       validateSchema(registerUserSchema),

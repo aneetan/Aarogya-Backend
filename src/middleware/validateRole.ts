@@ -27,4 +27,4 @@ export const requireRole = (allowedRoles: string[]) => {
 // Specific role middlewares for convenience
 export const requireLocalBody = requireRole(['local_body']);
 export const requireUser = requireRole(['user']);
-// export const requireUserOrLocalBody = requireRole(['user', 'local_body']);
+export const requireUserOrLocalBody = requireRole(['user', 'local_body']);
