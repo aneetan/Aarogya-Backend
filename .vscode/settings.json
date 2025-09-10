@@ -6,6 +6,7 @@
       "isready",
       "numpages",
       "redcross",
+      "setex",
       "supabase",
       "Vectorizer"
    ]

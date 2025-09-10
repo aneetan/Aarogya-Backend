@@ -1,13 +1,16 @@
 import { Sequelize } from "sequelize";
 import Camp from "./camp.model";
+import User from "./user.model";
 
 interface Models {
-   Camp: typeof Camp
+   Camp: typeof Camp;
+   User: typeof User;
 }
    
 export function  initializeModels(sequelize: Sequelize): Models {
    const models: Models = {
-      Camp: Camp.initialize(sequelize)
+      Camp: Camp.initialize(sequelize),
+      User: User.initialize(sequelize)
    }
 
    // //set up associations
