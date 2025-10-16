@@ -45,7 +45,7 @@ class CampController {
       }
    ]
    getCamps= [
-      verifyAccessToken,
+      // verifyAccessToken,
       async (req: Request, res: Response, next: NextFunction) => {
          try{
             const notes: CampAttributes[] = await campRepository.getCamps();
